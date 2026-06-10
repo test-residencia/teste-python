@@ -78,3 +78,9 @@ def buscar_por_nome(nome: str):
         "quantidade": len(resultado),
         "usuarios": resultado.to_dict(orient="records")
     }
+
+@app.get("/dominio/{email}")
+def obter_dominio_email(email: str):
+    return {
+        "dominio": email.split("@")[1]
+    }
