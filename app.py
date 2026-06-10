@@ -64,3 +64,17 @@ def sincronizar_usuarios():
         "mensagem": "Usuários sincronizados",
         "quantidade": len(df)
     }
+
+
+@app.get("/usuarios/busca/{nome}")
+def buscar_por_nome(nome: str):
+    df = carregar_usuarios()
+
+    resultado = df[
+        df["nome"].str.contains(nome, case=False)
+    ]
+
+    return {
+        "quantidade": len(resultado),
+        "usuarios": resultado.to_dict(orient="records")
+    }
